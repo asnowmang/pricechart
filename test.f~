@@ -1,0 +1,74 @@
+      PROGRAM XMRGRAPH
+      INTEGER x, y, count, tempx, tempy
+      INTEGER textx, texty
+      CHARACTER*3 title
+
+      title = "xmr"
+      
+c     Start PostScript
+      CALL PS
+      CALL NPATH
+      
+      x = 160
+      y = 650
+      tempx = x + 200
+      tempy = y - 10
+      count = 0
+
+c      CALL MVTO(x + 200, y - 10)
+c      CALL HELVETICA(16)
+c      CALL SHOW("title")
+
+c
+C ALL STROKE
+      
+c     Draw Y axis of graph
+      CALL MVTO(x, y)
+      x = x - 5
+      CALL LNTO(x, y)
+      DO WHILE (count .LT. 10)
+         CALL MVTO(x, y)
+         x = x - 5
+         CALL LNTO(x, y)
+         y = y - 40
+         CALL LNTO(x, y)
+         x = x + 5
+         CALL LNTO(x, y)
+         count = count + 1
+      ENDDO
+
+      x = x - 5
+      textx = x
+      texty = y
+      y = y + 5
+      count = 0
+
+c     Draw X axis of graph
+      DO WHILE (count .LT. 10)
+         CALL MVTO(x, y)
+         y = y - 5
+         CALL LNTO(x, y)
+         x = x + 40
+         CALL LNTO(x, y)
+         y = y + 5
+         CALL LNTO(x, y)
+         count = count + 1
+      ENDDO
+      y = y + 5
+      CALL LNTO(x, y)
+
+      CALL STROKE
+
+c     Labels
+      texty = texty - 14
+      CALL MVTO(textx, texty)
+      CALL HELVETICA(16)
+      CALL SHOW("TITLE")
+      CALL MVTO(tempx, tempy)
+      CALL HELVETICA(12)
+      CALL SHOW("TEST")
+     
+      CALL STROKE
+      CALL SHOWPG
+
+      END PROGRAM XMRGRAPH

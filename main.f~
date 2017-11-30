@@ -1,0 +1,24 @@
+      PROGRAM XMRGRAPH
+      INTEGER x, y, count
+
+      x = 160
+      y = 650
+      count = 0
+
+      CALL PS
+      CALL SCALE(100)
+      CALL NPATH
+      DO WHILE (count .LT. 5)
+         CALL MVTO(x, y)
+         x = x - 10
+         CALL LNTO(x, y)
+         y = y - 20
+         CALL LNTO(x, y)
+         x = x + 10
+         CALL LNTO(x, y)
+      ENDDO
+
+      CALL STROKE
+      CALL SHOWPAGE
+
+      END PROGRAM XMRGRAPH
